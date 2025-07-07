@@ -1,12 +1,14 @@
-import Image from "next/image";
+import Images from "next/image";
 import Link from "next/link";
 import { type SanityDocument } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/app/client"; // adjust this if your client is elsewhere
+import type { Image } from '@sanity/types'; // if installed
 
 // Inline helper for building Sanity image URLs
 const builder = imageUrlBuilder(client);
-function urlFor(source: any) {
+
+function urlFor(source: Image) {
   return builder.image(source);
 }
 
@@ -33,14 +35,14 @@ export default async function IndexPage() {
 
   return (
     <main className="container mx-auto min-h-screen max-w-3xl p-8">
-      <h1 className="text-4xl font-bold mb-8">Posts</h1>
+      <h1 className="text-6xl font-bold mb-8">Latest Posts</h1>
       <ul className="flex flex-col gap-y-8">
         {posts.map((post) => (
           <li key={post._id}>
             <Link href={`/${post.slug.current}`}>
               <div className="space-y-2">
                 {post.image?.asset?.url && (
-                  <Image
+                  <Images
                     src={urlFor(post.image).width(800).height(450).url()}
                     alt={post.image?.alt || post.title}
                     width={800}
