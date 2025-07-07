@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+
 import Images from "next/image";
 import Link from "next/link";
 import { type SanityDocument } from "next-sanity";
